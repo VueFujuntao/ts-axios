@@ -1,3 +1,9 @@
+/*
+ * @Author: fjt
+ * @Date: 2021-06-06 12:21:28
+ * @LastEditors: fjt
+ * @LastEditTime: 2021-06-06 18:14:33
+ */
 import resolve from 'rollup-plugin-node-resolve'
 import commonjs from 'rollup-plugin-commonjs'
 import sourceMaps from 'rollup-plugin-sourcemaps'
@@ -7,7 +13,7 @@ import json from 'rollup-plugin-json'
 
 const pkg = require('./package.json')
 
-const libraryName = 'ts-axios'
+const libraryName = 'index'
 
 export default {
   input: `src/${libraryName}.ts`,

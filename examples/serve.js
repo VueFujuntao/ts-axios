@@ -2,7 +2,7 @@
  * @Author: fjt
  * @Date: 2021-06-06 13:55:25
  * @LastEditors: fjt
- * @LastEditTime: 2021-06-06 14:29:56
+ * @LastEditTime: 2021-06-06 21:57:40
  */
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -37,6 +37,10 @@ router.get('/simple/get', function (req, res) {
         msg: 'hello world'
     });
 });
+
+router.get('/base/get', function(req, res) {
+    res.json(req.query);
+})
 
 app.use(router);
 

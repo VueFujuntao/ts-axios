@@ -2,9 +2,9 @@
  * @Author: fjt
  * @Date: 2021-06-06 20:52:36
  * @LastEditors: fjt
- * @LastEditTime: 2021-06-06 22:02:29
+ * @LastEditTime: 2021-06-07 21:33:54
  */
-import { isDate, isObject } from './utils'
+import { isDate, isPlainObject } from './utils'
 
 //  特殊符号转译回来
 function encode(val: string): string {
@@ -42,7 +42,7 @@ export function buildURL(url: string, params?: any): string {
     values.forEach(function(val) {
       if (isDate(val)) {
         val = val.toISOString()
-      } else if (isObject(val)) {
+      } else if (isPlainObject(val)) {
         val = JSON.stringify(val)
       }
       parts.push(`${encode(key)}=${encode(val)}`)

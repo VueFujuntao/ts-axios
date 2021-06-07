@@ -2,7 +2,7 @@
  * @Author: fjt
  * @Date: 2021-06-06 21:52:06
  * @LastEditors: fjt
- * @LastEditTime: 2021-06-06 22:07:27
+ * @LastEditTime: 2021-06-07 22:45:27
  */
 import axios from '../../src/index';
 
@@ -65,4 +65,43 @@ axios({
     params: {
         bar: 'baz'
     }
+});
+
+axios({
+    method: 'post',
+    url: '/base/post',
+    data: {
+        a: 1,
+        b: 2
+    }
+});
+
+const arr = new Int32Array([21.23]);
+axios({
+    method: 'post',
+    url: '/base/buffer',
+    data: arr
+})
+
+
+axios({
+    method: 'post',
+    url: '/base/post',
+    headers: {
+        'content-type': 'application/json',
+        'Accept': 'application/json, text/plain, */*'
+    },
+    data: {
+        a: 1,
+        b: 2
+    }
+});
+
+const paramsString = 'q=URILtils.searchParams&topic=api';
+const searchParams = new URLSearchParams(paramsString);
+
+axios({
+    method: 'POST',
+    url: '/base/post',
+    data: searchParams
 })

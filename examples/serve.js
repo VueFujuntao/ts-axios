@@ -2,7 +2,7 @@
  * @Author: fjt
  * @Date: 2021-06-06 13:55:25
  * @LastEditors: fjt
- * @LastEditTime: 2021-06-08 20:41:14
+ * @LastEditTime: 2021-06-08 23:16:23
  */
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -60,6 +60,26 @@ router.post('/base/buffer', function (req, res) {
     })
 });
 
+
+router.get('/error/get', function (req, res) {
+    if (Math.random() > 0.5) {
+        res.json({
+            msg: 'hello world'
+        });
+    } else {
+        res.status(500);
+        res.end();
+    }
+});
+
+
+router.get('/error/timeout', function (req, res) {
+    setTimeout(() => {
+        res.json({
+            msg: 'hello world',
+        });
+    }, 3000);
+});
 app.use(router);
 
 

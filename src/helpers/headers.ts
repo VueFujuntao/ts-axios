@@ -2,7 +2,7 @@
  * @Author: fjt
  * @Date: 2021-06-07 21:52:59
  * @LastEditors: fjt
- * @LastEditTime: 2021-06-08 21:22:14
+ * @LastEditTime: 2021-06-08 23:12:18
  */
 import { isPlainObject } from './utils'
 
@@ -49,7 +49,6 @@ export function parseHeaders(headers: string): any {
     }
     parsed[key] = value
   })
-  console.log(parsed)
 
   return parsed
 }

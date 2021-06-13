@@ -2,9 +2,9 @@
  * @Author: fjt
  * @Date: 2021-06-11 22:03:45
  * @LastEditors: fjt
- * @LastEditTime: 2021-06-12 22:20:08
+ * @LastEditTime: 2021-06-13 18:56:36
  */
-import axios, { AxiosResponse } from "../../src/index";
+import axios from "../../src/index";
 
 axios({
     url: '/extend/post',
@@ -46,19 +46,19 @@ axios('/extend/post', {
         msg: 'hello'
     }
 });
+
 interface ResponseData<T = any> {
     code: number
     result: T
     message: string
 }
+
 interface User {
     name: string
 }
 
 function getUser<T>() {
-    return axios<ResponseData<T>>('/extend/user').then(res => res.data).catch(err => {
-
-    })
+    return axios<ResponseData<T>>('/extend/user').then(res => res.data);
 }
 
 async function text() {

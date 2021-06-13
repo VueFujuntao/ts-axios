@@ -2,7 +2,7 @@
  * @Author: fjt
  * @Date: 2021-06-06 13:55:25
  * @LastEditors: fjt
- * @LastEditTime: 2021-06-12 22:10:01
+ * @LastEditTime: 2021-06-13 19:06:53
  */
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -39,6 +39,8 @@ registerBaseRouter();
 registerErrorRouter();
 
 registerExtendRouter();
+
+registerInterceptorRouter();
 
 function registerSimpleRouter() {
     router.get('/simple/get', function (req, res) {
@@ -139,6 +141,12 @@ function registerExtendRouter() {
             }
         })
     })
+}
+
+function registerInterceptorRouter() {
+    router.get('/interceptor/get', function(req, res) {
+        res.end('hello');
+    });
 }
 
 app.use(router);

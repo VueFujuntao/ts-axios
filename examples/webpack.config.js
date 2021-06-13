@@ -2,7 +2,7 @@
  * @Author: fjt
  * @Date: 2021-06-06 13:49:53
  * @LastEditors: fjt
- * @LastEditTime: 2021-06-06 14:16:58
+ * @LastEditTime: 2021-06-13 19:07:37
  */
 const fs = require('fs')
 const path = require('path')
@@ -25,7 +25,6 @@ module.exports = {
     if (fs.statSync(fullDir).isDirectory() && fs.existsSync(entry)) {
       entries[dir] = ['webpack-hot-middleware/client', entry]
     }
-    console.log(entries);
     return entries
   }, {}),
 

@@ -2,7 +2,7 @@
  * @Author: fjt
  * @Date: 2021-06-06 13:33:26
  * @LastEditors: fjt
- * @LastEditTime: 2021-06-09 21:59:17
+ * @LastEditTime: 2021-06-13 18:55:28
  */
 import { AxiosRequestConfig, AxiosPromise, AxiosResponse } from '../types/index'
 import { parseHeaders } from '../helpers/headers'
@@ -50,11 +50,11 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
     }
 
     // 超时处理
-    request.ontimeout = function handleTimeout(error) {
+    request.ontimeout = function handleTimeout() {
       reject(createError(`Timeout of ${timeout} ms exceeded`, config, 'ECONNABORTED', request))
     }
 
-    request.onprogress = function(event) {
+    request.onprogress = function() {
       // console.log(event);
     }
     //  toUpperCase 大写

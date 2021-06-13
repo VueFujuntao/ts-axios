@@ -2,11 +2,11 @@
  * @Author: fjt
  * @Date: 2021-06-06 13:33:26
  * @LastEditors: fjt
- * @LastEditTime: 2021-06-09 20:39:26
+ * @LastEditTime: 2021-06-09 21:59:17
  */
-import { AxiosRequestConfig, AxiosPromise, AxiosResponse } from './types/index'
-import { parseHeaders } from './helpers/headers'
-import { createError } from './helpers/error'
+import { AxiosRequestConfig, AxiosPromise, AxiosResponse } from '../types/index'
+import { parseHeaders } from '../helpers/headers'
+import { createError } from '../helpers/error'
 
 export default function xhr(config: AxiosRequestConfig): AxiosPromise {
   return new Promise((resolve, reject) => {
@@ -58,7 +58,7 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
       // console.log(event);
     }
     //  toUpperCase 大写
-    request.open(method.toUpperCase(), url, true)
+    request.open(method.toUpperCase(), url!, true)
     // 设置headers
 
     Object.keys(headers).forEach((name: string) => {

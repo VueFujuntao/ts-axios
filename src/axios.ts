@@ -2,14 +2,15 @@
  * @Author: fjt
  * @Date: 2021-06-06 12:56:33
  * @LastEditors: fjt
- * @LastEditTime: 2021-06-09 22:32:05
+ * @LastEditTime: 2021-06-14 07:24:16
  */
 import Axios from './code/Axios'
 import { extend } from './helpers/utils'
-import { AxiosInstance } from './types'
+import { AxiosInstance, AxiosRequestConfig } from './types'
+import defaults from './defaults'
 
-function createInstance(): AxiosInstance {
-  const context = new Axios()
+function createInstance(config: AxiosRequestConfig): AxiosInstance {
+  const context = new Axios(config)
   //  request this 指向问题 通过bind 指向 实例
   const instance = Axios.prototype.request.bind(context)
 
@@ -19,6 +20,6 @@ function createInstance(): AxiosInstance {
   return instance as AxiosInstance
 }
 
-const axios = createInstance()
+const axios = createInstance(defaults)
 
 export default axios

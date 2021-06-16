@@ -2,7 +2,7 @@
  * @Author: fjt
  * @Date: 2021-06-06 13:26:22
  * @LastEditors: fjt
- * @LastEditTime: 2021-06-14 07:48:09
+ * @LastEditTime: 2021-06-16 22:37:23
  */
 
 export type Method =
@@ -29,6 +29,8 @@ export interface AxiosRequestConfig {
   headers?: any
   responseType?: XMLHttpRequestResponseType
   timeout?: number
+  transformRequest?: AxiosTransformer | AxiosTransformer[]
+  transformResponse?: AxiosTransformer | AxiosTransformer[]
 
   [propName: string]: any
 }
@@ -94,4 +96,8 @@ export interface ResolvedFn<T> {
 
 export interface RejectedFn {
   (error: any): any
+}
+
+export interface AxiosTransformer {
+  (data: any, headers?: any): any
 }

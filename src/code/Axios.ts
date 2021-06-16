@@ -2,7 +2,7 @@
  * @Author: fjt
  * @Date: 2021-06-09 21:51:55
  * @LastEditors: fjt
- * @LastEditTime: 2021-06-14 09:41:10
+ * @LastEditTime: 2021-06-16 23:18:41
  */
 import {
   AxiosPromise,
@@ -48,8 +48,10 @@ export default class Axios {
     } else {
       config = url
     }
+    console.log(config)
 
     config = mergeConfig(this.defaults, config)
+    console.log(config)
 
     const chain: PromiseChain<any>[] = [
       {

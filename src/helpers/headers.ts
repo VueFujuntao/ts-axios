@@ -2,9 +2,10 @@
  * @Author: fjt
  * @Date: 2021-06-07 21:52:59
  * @LastEditors: fjt
- * @LastEditTime: 2021-06-12 11:11:32
+ * @LastEditTime: 2021-06-16 23:16:49
  */
-import { isPlainObject } from './utils'
+import { Method } from '../types'
+import { deepMerge, isPlainObject } from './utils'
 
 function normalizeHeaderName(headers: any, normalizedName: string): void {
   if (!headers) {
@@ -51,4 +52,23 @@ export function parseHeaders(headers: string): any {
   })
 
   return parsed
+}
+
+export function flattenHeaders(headers: any, method: Method): any {
+  console.log(headers)
+
+  if (!headers) {
+    return headers
+  }
+  console.log(headers)
+
+  headers = deepMerge(headers.common, headers[method], headers)
+  console.log(headers)
+  // 删除
+  const methodsToDelete = ['delete', 'get', 'head', 'options', 'post', 'put', 'patch', 'common']
+  methodsToDelete.forEach(method => {
+    delete headers[method]
+  })
+
+  return headers
 }

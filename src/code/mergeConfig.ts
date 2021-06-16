@@ -2,7 +2,7 @@
  * @Author: fjt
  * @Date: 2021-06-14 07:32:09
  * @LastEditors: fjt
- * @LastEditTime: 2021-06-14 07:59:15
+ * @LastEditTime: 2021-06-16 23:35:10
  */
 import { isPlainObject, deepMerge } from '../helpers/utils'
 import { AxiosRequestConfig } from '../types'
@@ -47,6 +47,9 @@ export default function mergeConfig(
   config1: AxiosRequestConfig,
   config2?: AxiosRequestConfig
 ): AxiosRequestConfig {
+  console.log(config1)
+  console.log(config2)
+
   if (!config2) {
     config2 = {}
   }
@@ -57,7 +60,7 @@ export default function mergeConfig(
     mergeField(key)
   }
 
-  for (let key in config2) {
+  for (let key in config1) {
     if (!config2[key]) {
       mergeField(key)
     }
@@ -67,6 +70,7 @@ export default function mergeConfig(
     const start = starts[key] || defaultStart
     config[key] = start(config1[key], config2![key]) // 字符串索引签名
   }
+  console.log(config)
 
   return config
 }

@@ -2,7 +2,7 @@
  * @Author: fjt
  * @Date: 2021-06-06 12:56:33
  * @LastEditors: fjt
- * @LastEditTime: 2021-06-14 07:24:16
+ * @LastEditTime: 2021-06-16 23:17:19
  */
 import Axios from './code/Axios'
 import { extend } from './helpers/utils'
@@ -19,6 +19,7 @@ function createInstance(config: AxiosRequestConfig): AxiosInstance {
 
   return instance as AxiosInstance
 }
+console.log(defaults)
 
 const axios = createInstance(defaults)
 

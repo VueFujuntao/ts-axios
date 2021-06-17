@@ -2,7 +2,7 @@
  * @Author: fjt
  * @Date: 2021-06-09 21:53:39
  * @LastEditors: fjt
- * @LastEditTime: 2021-06-16 23:16:12
+ * @LastEditTime: 2021-06-17 23:14:52
  */
 import { AxiosRequestConfig, AxiosPromise, AxiosResponse } from '../types/index'
 import xhr from './xhr'
@@ -11,8 +11,8 @@ import { flattenHeaders } from '../helpers/headers'
 import transform from './transform'
 
 export default function dispatchRequest(config: AxiosRequestConfig): AxiosPromise {
+  throwIfCancellationRequested(config)
   processConfig(config)
-  console.log(config.headers)
 
   return xhr(config).then(res => {
     return transformResponseData(res)
@@ -36,4 +36,10 @@ function transformURL(config: AxiosRequestConfig): string {
 function transformResponseData(res: AxiosResponse): AxiosResponse {
   res.data = transform(res.data, res.headers, res.config.transformResponse)
   return res
+}
+
+function throwIfCancellationRequested(config: AxiosRequestConfig): void {
+  if (config.cancelToken) {
+    config.cancelToken.throwIfRequested()
+  }
 }

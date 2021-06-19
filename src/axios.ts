@@ -2,7 +2,7 @@
  * @Author: fjt
  * @Date: 2021-06-06 12:56:33
  * @LastEditors: fjt
- * @LastEditTime: 2021-06-17 23:09:12
+ * @LastEditTime: 2021-06-19 13:58:55
  */
 import Axios from './code/Axios'
 import { extend } from './helpers/utils'
@@ -10,7 +10,7 @@ import { AxiosInstance, AxiosRequestConfig, AxiosStatic } from './types'
 import defaults from './defaults'
 import mergeConfig from './code/mergeConfig'
 import cancelToken from './cancel/cancelToken'
-import Cancel, { isCancel } from './cancel/Cancel'
+import { isCancel } from './cancel/Cancel'
 
 function createInstance(config: AxiosRequestConfig): AxiosStatic {
   const context = new Axios(config)
@@ -31,7 +31,6 @@ axios.create = function(config: AxiosRequestConfig): AxiosInstance {
 }
 
 axios.CancelToken = cancelToken
-axios.Cancel = Cancel
 axios.isCancel = isCancel
 
 export default axios

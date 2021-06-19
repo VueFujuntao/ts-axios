@@ -2,7 +2,7 @@
  * @Author: fjt
  * @Date: 2021-06-08 22:58:43
  * @LastEditors: fjt
- * @LastEditTime: 2021-06-09 20:52:32
+ * @LastEditTime: 2021-06-19 18:56:45
  */
 import axios, { AxiosError } from "../../src/index";
 
@@ -45,5 +45,4 @@ axios({
 }).catch((err: AxiosError) => {
     console.log(err.message);
     console.log(err.request);
-    
 });

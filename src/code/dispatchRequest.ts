@@ -2,7 +2,7 @@
  * @Author: fjt
  * @Date: 2021-06-09 21:53:39
  * @LastEditors: fjt
- * @LastEditTime: 2021-06-17 23:14:52
+ * @LastEditTime: 2021-06-19 12:18:49
  */
 import { AxiosRequestConfig, AxiosPromise, AxiosResponse } from '../types/index'
 import xhr from './xhr'

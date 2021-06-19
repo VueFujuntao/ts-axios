@@ -2,7 +2,7 @@
  * @Author: fjt
  * @Date: 2021-06-06 21:03:38
  * @LastEditors: fjt
- * @LastEditTime: 2021-06-14 09:34:15
+ * @LastEditTime: 2021-06-19 15:28:17
  */
 // 缓存方法
 const toString = Object.prototype.toString

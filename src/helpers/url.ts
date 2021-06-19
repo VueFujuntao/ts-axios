@@ -2,11 +2,22 @@
  * @Author: fjt
  * @Date: 2021-06-06 20:52:36
  * @LastEditors: fjt
- * @LastEditTime: 2021-06-07 21:33:54
+ * @LastEditTime: 2021-06-19 19:40:49
  */
 import { isDate, isPlainObject } from './utils'
 
-//  特殊符号转译回来
+interface URLOrigin {
+  protocol: string
+  host: string
+}
+
+/**
+ * @name: 特殊符号转译回来
+ * @test: test font
+ * @msg:
+ * @param {string} val
+ * @return {string}
+ */
 function encode(val: string): string {
   return encodeURIComponent(val)
     .replace(/%40/g, '@')
@@ -60,4 +71,37 @@ export function buildURL(url: string, params?: any): string {
   }
 
   return url
+}
+
+/**
+ * @name: 判断是否同源
+ * @test: test font
+ * @msg:
+ * @param {string} requestURL
+ * @return {boolean}
+ */
+export function isURLSameOrigin(requestURL: string): boolean {
+  const parsedOrigin = resolveFn(requestURL)
+  return (
+    parsedOrigin.protocol === currentOrigin.protocol && parsedOrigin.host === currentOrigin.host
+  )
+}
+
+const urlParsingNode = document.createElement('a')
+// 当前页面的源
+const currentOrigin = resolveFn(window.location.href)
+/**
+ * @name: 获取协议 域名
+ * @test: test font
+ * @msg:
+ * @param {string} url
+ * @return {Object}
+ */
+function resolveFn(url: string): URLOrigin {
+  urlParsingNode.setAttribute('href', url)
+  const { protocol, host } = urlParsingNode
+  return {
+    protocol,
+    host
+  }
 }

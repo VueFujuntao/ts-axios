@@ -2,15 +2,28 @@
  * @Author: fjt
  * @Date: 2021-06-06 13:33:26
  * @LastEditors: fjt
- * @LastEditTime: 2021-06-17 22:01:41
+ * @LastEditTime: 2021-06-19 20:19:11
  */
 import { AxiosRequestConfig, AxiosPromise, AxiosResponse } from '../types/index'
 import { parseHeaders } from '../helpers/headers'
 import { createError } from '../helpers/error'
+import { isURLSameOrigin } from './../helpers/url'
+import cookie from './../helpers/cookie'
 
 export default function xhr(config: AxiosRequestConfig): AxiosPromise {
   return new Promise((resolve, reject) => {
-    const { data = null, url, method = 'get', headers, responseType, timeout, cancelToken } = config
+    const {
+      data = null,
+      url,
+      method = 'get',
+      headers,
+      responseType,
+      timeout,
+      cancelToken,
+      withCredentials,
+      xsrfCookieName,
+      xsrfHeaderName
+    } = config
 
     const request = new XMLHttpRequest()
 
@@ -22,6 +35,9 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
       request.timeout = timeout
     }
 
+    if (withCredentials) {
+      request.withCredentials = withCredentials
+    }
     request.onreadystatechange = function handleLoad() {
       if (request.readyState !== 4) {
         return
@@ -60,6 +76,17 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
     //  toUpperCase 大写
     request.open(method.toUpperCase(), url!, true)
     // 设置headers
+
+    if ((withCredentials || isURLSameOrigin(url!)) && xsrfCookieName) {
+      console.log(xsrfCookieName)
+
+      const xsrfValue = cookie.read(xsrfCookieName)
+      console.log(xsrfValue)
+
+      if (xsrfValue && xsrfHeaderName) {
+        headers[xsrfHeaderName] = xsrfValue
+      }
+    }
 
     Object.keys(headers).forEach((name: string) => {
       if (data === null && name.toLowerCase() === 'content-type') {

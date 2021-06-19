@@ -2,15 +2,16 @@
  * @Author: fjt
  * @Date: 2021-06-06 13:55:25
  * @LastEditors: fjt
- * @LastEditTime: 2021-06-17 23:28:29
+ * @LastEditTime: 2021-06-19 20:24:58
  */
 const express = require('express');
 const bodyParser = require('body-parser');
 const webpack = require('webpack');
+const cookieParser = require('cookie-parser');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const webpackConfig = require('./webpack.config');
-
+require('./serve2');
 const app = express();
 const compiler = webpack(webpackConfig);
 
@@ -25,10 +26,15 @@ app.use(webpackDevMiddleware(compiler, {
 
 app.use(webpackHotMiddleware(compiler));
 
-app.use(express.static(__dirname));
+app.use(express.static(__dirname, {
+    setHeaders(res) {
+        res.cookie('XSFR-TOKEN-D', 'fjt');
+    }
+}));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 const router = express.Router();
 
@@ -45,6 +51,8 @@ registerInterceptorRouter();
 registerConfigRouter();
 
 registerCancelRouter();
+
+registerMoreRouter();
 
 function registerSimpleRouter() {
     router.get('/simple/get', function (req, res) {
@@ -171,6 +179,12 @@ function registerCancelRouter () {
         setTimeout(() => {
             res.json(req.body);
         }, 1000)
+    })
+}
+
+function registerMoreRouter() {
+    router.get('/more/get', function(req, res) {
+        res.json(req.cookies)
     })
 }
 

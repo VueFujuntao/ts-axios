@@ -2,7 +2,13 @@
  * @Author: fjt
  * @Date: 2021-06-06 13:26:22
  * @LastEditors: fjt
- * @LastEditTime: 2021-06-17 23:10:20
+ * @LastEditTime: 2021-06-19 19:27:15
+ */
+/*
+ * @Author: fjt
+ * @Date: 2021-06-06 13:26:22
+ * @LastEditors: fjt
+ * @LastEditTime: 2021-06-19 18:58:53
  */
 
 export type Method =
@@ -32,7 +38,9 @@ export interface AxiosRequestConfig {
   transformRequest?: AxiosTransformer | AxiosTransformer[]
   transformResponse?: AxiosTransformer | AxiosTransformer[]
   cancelToken?: CancelToken
-
+  withCredentials?: boolean
+  xsrfCookieName?: string
+  xsrfHeaderName?: string
   [propName: string]: any
 }
 

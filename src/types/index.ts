@@ -2,7 +2,7 @@
  * @Author: fjt
  * @Date: 2021-06-06 13:26:22
  * @LastEditors: fjt
- * @LastEditTime: 2021-06-20 13:45:52
+ * @LastEditTime: 2021-06-20 16:38:29
  */
 /*
  * @Author: fjt
@@ -43,6 +43,7 @@ export interface AxiosRequestConfig {
   xsrfHeaderName?: string
   onDownloadProgress?: (e: ProgressEvent) => void
   onUploadProgress?: (e: ProgressEvent) => void
+  auth: AxiosBasicCredentials
   [propName: string]: any
 }
 
@@ -156,4 +157,9 @@ export interface Cancel {
 
 export interface CancelStatic {
   new (message?: string): Cancel
+}
+
+export interface AxiosBasicCredentials {
+  username: string
+  password: string
 }

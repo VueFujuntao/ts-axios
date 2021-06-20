@@ -2,7 +2,7 @@
  * @Author: fjt
  * @Date: 2021-06-14 07:32:09
  * @LastEditors: fjt
- * @LastEditTime: 2021-06-16 23:35:10
+ * @LastEditTime: 2021-06-20 16:39:39
  */
 import { isPlainObject, deepMerge } from '../helpers/utils'
 import { AxiosRequestConfig } from '../types'
@@ -31,7 +31,7 @@ function deepMergeStart(val1: any, val2: any): any {
   }
 }
 
-const startKeysDeepMerge = ['headers']
+const startKeysDeepMerge = ['headers', 'auth']
 
 startKeysDeepMerge.forEach(key => {
   starts[key] = deepMergeStart

@@ -2,11 +2,12 @@
  * @Author: fjt
  * @Date: 2021-06-06 13:55:25
  * @LastEditors: fjt
- * @LastEditTime: 2021-06-20 15:51:14
+ * @LastEditTime: 2021-06-20 16:54:35
  */
 const express = require('express');
 const bodyParser = require('body-parser');
 const webpack = require('webpack');
+const atob = require('atob');
 const cookieParser = require('cookie-parser');
 const multipart = require('connect-multiparty');
 const webpackDevMiddleware = require('webpack-dev-middleware');
@@ -196,6 +197,18 @@ function registerMoreRouter() {
     router.post('/more/upload', function(req, res) {
         console.log(req.body, req.files);
         res.end('upload success!');
+    })
+
+    router.post('/more/post', function(req, res) {
+        const auth = req.headers.authorization;
+        const [type, credentials] = auth.split(' ');
+        const [username, password] = atob(credentials).split(':');
+        if (type === 'Basic' && username === 'fjt' && password === '123456') {
+            res.json(req.body);
+        } else {
+            res.status(401);
+            res.end('UnAuthorization')
+        }
     })
 }
 

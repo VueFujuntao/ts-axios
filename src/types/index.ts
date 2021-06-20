@@ -2,7 +2,7 @@
  * @Author: fjt
  * @Date: 2021-06-06 13:26:22
  * @LastEditors: fjt
- * @LastEditTime: 2021-06-20 16:38:29
+ * @LastEditTime: 2021-06-20 18:35:25
  */
 /*
  * @Author: fjt
@@ -43,7 +43,9 @@ export interface AxiosRequestConfig {
   xsrfHeaderName?: string
   onDownloadProgress?: (e: ProgressEvent) => void
   onUploadProgress?: (e: ProgressEvent) => void
-  auth: AxiosBasicCredentials
+  auth?: AxiosBasicCredentials
+  validateStatus?: (status: number) => boolean
+
   [propName: string]: any
 }
 

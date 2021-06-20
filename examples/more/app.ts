@@ -2,11 +2,12 @@
  * @Author: fjt
  * @Date: 2021-06-06 21:52:06
  * @LastEditors: fjt
- * @LastEditTime: 2021-06-20 16:57:24
+ * @LastEditTime: 2021-06-20 20:20:07
  */
-import axios from '../../src/index';
+import axios, { AxiosError } from '../../src/index';
 import 'nprogress/nprogress.css';
 import NProgress from "nprogress";
+
 // document.cookie = 'a=b'
 // const instal = axios.create();
 
@@ -90,15 +91,31 @@ const instance = axios.create();
 //     }
 // })
 
-instance.post('/more/post', {
-    a: 1,
-}, {
-    auth: {
-        username: 'fjt',
-        password: '123456'
+// instance.post('/more/post', {
+//     a: 1,
+// }, {
+//     auth: {
+//         username: 'fjt',
+//         password: '123456'
+//     }
+// }).then(response => {
+//     console.log(response);
+// }).catch(err => {
+//     console.log(err);
+// });
+
+instance.get('/more/304').then(response => {
+    console.log(response);
+}).catch((error: AxiosError) => {
+    console.log(error);
+});
+
+instance.get('/more/304', {
+    validateStatus(status) {
+        return status >= 200 && status < 400;
     }
 }).then(response => {
     console.log(response);
-}).catch(err => {
-    console.log(err);
+}).catch((error: AxiosError) => {
+    console.log(error);
 });

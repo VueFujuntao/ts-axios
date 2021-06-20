@@ -2,7 +2,7 @@
  * @Author: fjt
  * @Date: 2021-06-06 13:55:25
  * @LastEditors: fjt
- * @LastEditTime: 2021-06-20 16:54:35
+ * @LastEditTime: 2021-06-20 18:43:41
  */
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -209,6 +209,11 @@ function registerMoreRouter() {
             res.status(401);
             res.end('UnAuthorization')
         }
+    })
+
+    router.get('/more/304', (req, res) => {
+        res.status(304);
+        res.end();
     })
 }
 

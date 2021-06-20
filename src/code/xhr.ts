@@ -2,7 +2,7 @@
  * @Author: fjt
  * @Date: 2021-06-06 13:33:26
  * @LastEditors: fjt
- * @LastEditTime: 2021-06-20 16:42:31
+ * @LastEditTime: 2021-06-20 18:38:23
  */
 import { AxiosRequestConfig, AxiosPromise, AxiosResponse } from '../types/index'
 import { parseHeaders } from '../helpers/headers'
@@ -26,7 +26,8 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
       xsrfHeaderName,
       onDownloadProgress,
       onUploadProgress,
-      auth
+      auth,
+      validateStatus
     } = config
 
     const request = new XMLHttpRequest()
@@ -135,7 +136,7 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
     }
 
     function hanldeResponse(response: AxiosResponse): void {
-      if (response.status >= 200 && response.status < 300) {
+      if (!validateStatus || validateStatus(response.status)) {
         resolve(response)
       } else {
         reject(

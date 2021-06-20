@@ -2,7 +2,7 @@
  * @Author: fjt
  * @Date: 2021-06-07 21:52:59
  * @LastEditors: fjt
- * @LastEditTime: 2021-06-19 11:49:08
+ * @LastEditTime: 2021-06-20 18:45:07
  */
 import { Method } from '../types'
 import { deepMerge, isPlainObject } from './utils'
@@ -58,17 +58,14 @@ export function flattenHeaders(headers: any, method: Method): any {
   if (!headers) {
     return headers
   }
-  console.log(headers)
 
   headers = deepMerge(headers.common, headers[method], headers)
-  console.log(headers)
 
   // 删除
   const methodsToDelete = ['delete', 'get', 'head', 'options', 'post', 'put', 'patch', 'common']
   methodsToDelete.forEach(method => {
     delete headers[method]
   })
-  console.log(headers)
 
   return headers
 }

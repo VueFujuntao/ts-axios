@@ -2,7 +2,7 @@
  * @Author: fjt
  * @Date: 2021-06-13 20:04:36
  * @LastEditors: fjt
- * @LastEditTime: 2021-06-19 19:38:48
+ * @LastEditTime: 2021-06-20 18:36:49
  */
 import { AxiosRequestConfig } from './types'
 import { processHeaders } from './helpers/headers'
@@ -49,7 +49,11 @@ const defaults: AxiosRequestConfig = {
     function(data: any): any {
       return tranformResponse(data)
     }
-  ]
+  ],
+
+  validateStatus(status: number): boolean {
+    return status >= 200 && status < 300
+  }
 }
 
 const methodsNoData = ['delete', 'get', 'head', 'options']

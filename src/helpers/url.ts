@@ -2,9 +2,9 @@
  * @Author: fjt
  * @Date: 2021-06-06 20:52:36
  * @LastEditors: fjt
- * @LastEditTime: 2021-06-19 19:40:49
+ * @LastEditTime: 2021-06-22 22:31:11
  */
-import { isDate, isPlainObject } from './utils'
+import { isDate, isPlainObject, isURLSearchParams } from './utils'
 
 interface URLOrigin {
   protocol: string
@@ -29,37 +29,48 @@ function encode(val: string): string {
     .replace(/%5D/gi, ']')
 }
 
-export function buildURL(url: string, params?: any): string {
+export function buildURL(
+  url: string,
+  params?: any,
+  paramsSerialzer?: (params: any) => string
+): string {
   if (!params) {
     return url
   }
+  let serializedParams
 
-  const parts: string[] = []
+  if (paramsSerialzer) {
+    serializedParams = paramsSerialzer(params)
+  } else if (isURLSearchParams(params)) {
+    serializedParams = params.toString()
+  } else {
+    const parts: string[] = []
 
-  Object.keys(params).forEach(function(key) {
-    const val = params[key]
-    if (val === null || typeof val === 'undefined') {
-      // 跳到下一个循环
-      return
-    }
-    let values = []
-    if (Array.isArray(val)) {
-      values = val
-      key += '[]'
-    } else {
-      values = [val]
-    }
-
-    values.forEach(function(val) {
-      if (isDate(val)) {
-        val = val.toISOString()
-      } else if (isPlainObject(val)) {
-        val = JSON.stringify(val)
+    Object.keys(params).forEach(function(key) {
+      const val = params[key]
+      if (val === null || typeof val === 'undefined') {
+        // 跳到下一个循环
+        return
       }
-      parts.push(`${encode(key)}=${encode(val)}`)
+      let values = []
+      if (Array.isArray(val)) {
+        values = val
+        key += '[]'
+      } else {
+        values = [val]
+      }
+
+      values.forEach(function(val) {
+        if (isDate(val)) {
+          val = val.toISOString()
+        } else if (isPlainObject(val)) {
+          val = JSON.stringify(val)
+        }
+        parts.push(`${encode(key)}=${encode(val)}`)
+      })
     })
-  })
-  let serializedParams = parts.join('&')
+    serializedParams = parts.join('&')
+  }
 
   if (serializedParams) {
     //  去除hash值后面参数

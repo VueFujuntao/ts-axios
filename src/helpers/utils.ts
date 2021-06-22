@@ -2,7 +2,7 @@
  * @Author: fjt
  * @Date: 2021-06-06 21:03:38
  * @LastEditors: fjt
- * @LastEditTime: 2021-06-20 13:49:56
+ * @LastEditTime: 2021-06-22 22:29:46
  */
 // 缓存方法
 const toString = Object.prototype.toString
@@ -23,6 +23,10 @@ export function isPlainObject(val: any): val is Object {
 
 export function isFormData(val: any): val is FormData {
   return typeof val !== 'undefined' && val instanceof FormData
+}
+
+export function isURLSearchParams(val: any): val is URLSearchParams {
+  return val !== 'undefined' && val instanceof URLSearchParams
 }
 
 // T U 范型 T & U 交叉类型

@@ -2,7 +2,7 @@
  * @Author: fjt
  * @Date: 2021-06-09 21:53:39
  * @LastEditors: fjt
- * @LastEditTime: 2021-06-19 12:18:49
+ * @LastEditTime: 2021-06-22 22:32:36
  */
 import { AxiosRequestConfig, AxiosPromise, AxiosResponse } from '../types/index'
 import xhr from './xhr'
@@ -28,9 +28,9 @@ function processConfig(config: AxiosRequestConfig): void {
 
 // 处理URL
 function transformURL(config: AxiosRequestConfig): string {
-  let { url, params } = config
+  let { url, params, paramsSerializer } = config
 
-  return buildURL(url!, params)
+  return buildURL(url!, params, paramsSerializer)
 }
 
 function transformResponseData(res: AxiosResponse): AxiosResponse {

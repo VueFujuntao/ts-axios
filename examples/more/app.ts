@@ -2,11 +2,12 @@
  * @Author: fjt
  * @Date: 2021-06-06 21:52:06
  * @LastEditors: fjt
- * @LastEditTime: 2021-06-20 20:20:07
+ * @LastEditTime: 2021-06-22 22:39:07
  */
 import axios, { AxiosError } from '../../src/index';
 import 'nprogress/nprogress.css';
 import NProgress from "nprogress";
+import qs from "qs";
 
 // document.cookie = 'a=b'
 // const instal = axios.create();
@@ -33,7 +34,11 @@ import NProgress from "nprogress";
 //      console.log(response);
 //  });
 
-const instance = axios.create();
+const instance = axios.create({
+    paramsSerializer(params) {
+        return qs.stringify(params, {arrayFormat: 'brackets'})
+    }
+});
 
 // function calculatePercentage(loaded: number, total: number): number {
 //     return Math.floor(loaded * 1.0) / total;
@@ -104,18 +109,47 @@ const instance = axios.create();
 //     console.log(err);
 // });
 
-instance.get('/more/304').then(response => {
-    console.log(response);
-}).catch((error: AxiosError) => {
-    console.log(error);
+// instance.get('/more/304').then(response => {
+//     console.log(response);
+// }).catch((error: AxiosError) => {
+//     console.log(error);
+// });
+
+// instance.get('/more/304', {
+//     validateStatus(status) {
+//         return status >= 200 && status < 400;
+//     }
+// }).then(response => {
+//     console.log(response);
+// }).catch((error: AxiosError) => {
+//     console.log(error);
+// });
+
+axios.get('/more/get', {
+    params: new URLSearchParams('a=b&c=d')
+}).then(res => {
+    console.log(res);
 });
 
-instance.get('/more/304', {
-    validateStatus(status) {
-        return status >= 200 && status < 400;
+axios.get('/more/get', {
+    params: {
+        a:1,
+        b:2,
+        c: ['a', 'b', 'c']
     }
 }).then(response => {
     console.log(response);
-}).catch((error: AxiosError) => {
+}).catch(error => {
     console.log(error);
 });
+
+instance.get('/more/get', {
+    params: {
+        a: 1,
+        b: 2,
+        c: ['a', 'b', 'c']
+    }
+}).then(response => {
+    console.log(response);
+    
+})

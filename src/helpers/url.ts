@@ -2,7 +2,7 @@
  * @Author: fjt
  * @Date: 2021-06-06 20:52:36
  * @LastEditors: fjt
- * @LastEditTime: 2021-06-22 22:31:11
+ * @LastEditTime: 2021-06-22 22:55:30
  */
 import { isDate, isPlainObject, isURLSearchParams } from './utils'
 
@@ -27,6 +27,14 @@ function encode(val: string): string {
     .replace(/%20/g, '+')
     .replace(/%5B/gi, '[')
     .replace(/%5D/gi, ']')
+}
+
+export function isAbsoluteURL(url: string): boolean {
+  return /(^[a-z][a-z\d\+\-\.]*:)?\/\//i.test(url)
+}
+
+export function combineURL(baseURL: string, relativeURL?: string): string {
+  return relativeURL ? baseURL.replace(/\/+&/, '') + '/' + relativeURL.replace(/^\/+/, '') : baseURL
 }
 
 export function buildURL(

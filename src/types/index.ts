@@ -2,7 +2,7 @@
  * @Author: fjt
  * @Date: 2021-06-06 13:26:22
  * @LastEditors: fjt
- * @LastEditTime: 2021-06-22 22:22:21
+ * @LastEditTime: 2021-06-22 22:48:55
  */
 /*
  * @Author: fjt
@@ -46,6 +46,7 @@ export interface AxiosRequestConfig {
   auth?: AxiosBasicCredentials
   validateStatus?: (status: number) => boolean
   paramsSerializer?: (params: any) => string
+  baseURL?: string
   [propName: string]: any
 }
 

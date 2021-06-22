@@ -2,7 +2,7 @@
  * @Author: fjt
  * @Date: 2021-06-06 21:52:06
  * @LastEditors: fjt
- * @LastEditTime: 2021-06-22 22:39:07
+ * @LastEditTime: 2021-06-22 22:59:58
  */
 import axios, { AxiosError } from '../../src/index';
 import 'nprogress/nprogress.css';
@@ -125,31 +125,39 @@ const instance = axios.create({
 //     console.log(error);
 // });
 
-axios.get('/more/get', {
-    params: new URLSearchParams('a=b&c=d')
-}).then(res => {
-    console.log(res);
+// axios.get('/more/get', {
+//     params: new URLSearchParams('a=b&c=d')
+// }).then(res => {
+//     console.log(res);
+// });
+
+// axios.get('/more/get', {
+//     params: {
+//         a:1,
+//         b:2,
+//         c: ['a', 'b', 'c']
+//     }
+// }).then(response => {
+//     console.log(response);
+// }).catch(error => {
+//     console.log(error);
+// });
+
+// instance.get('/more/get', {
+//     params: {
+//         a: 1,
+//         b: 2,
+//         c: ['a', 'b', 'c']
+//     }
+// }).then(response => {
+//     console.log(response);
+// })
+
+
+const instan = axios.create({
+    baseURL: 'https://img1.mukewang.com/'
 });
 
-axios.get('/more/get', {
-    params: {
-        a:1,
-        b:2,
-        c: ['a', 'b', 'c']
-    }
-}).then(response => {
-    console.log(response);
-}).catch(error => {
-    console.log(error);
-});
+instan.get('/60cffece00019d4217920764.jpg')
 
-instance.get('/more/get', {
-    params: {
-        a: 1,
-        b: 2,
-        c: ['a', 'b', 'c']
-    }
-}).then(response => {
-    console.log(response);
-    
-})
+instan.get('https://img1.mukewang.com/60cffece00019d4217920764.jpg')

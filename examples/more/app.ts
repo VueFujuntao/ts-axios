@@ -2,9 +2,9 @@
  * @Author: fjt
  * @Date: 2021-06-06 21:52:06
  * @LastEditors: fjt
- * @LastEditTime: 2021-06-22 22:59:58
+ * @LastEditTime: 2021-06-27 08:31:56
  */
-import axios, { AxiosError } from '../../src/index';
+import axios, { AxiosError, AxiosPromise } from '../../src/index';
 import 'nprogress/nprogress.css';
 import NProgress from "nprogress";
 import qs from "qs";
@@ -154,10 +154,41 @@ const instance = axios.create({
 // })
 
 
-const instan = axios.create({
-    baseURL: 'https://img1.mukewang.com/'
+// const instan = axios.create({
+//     baseURL: 'https://img1.mukewang.com/'
+// });
+
+// instan.get('/60cffece00019d4217920764.jpg')
+
+// instan.get('https://img1.mukewang.com/60cffece00019d4217920764.jpg')
+
+
+function getA(): AxiosPromise {
+    return axios.get('/more/A')
+}
+
+function getB(): AxiosPromise {
+    return axios.get('/more/B');
+}
+console.log(getB());
+
+axios.all([getA(), getB()]).then(axios.spread(function(resA, resB) {
+    console.log(resA);
+    console.log(resB);
+}));
+
+axios.all([getA(), getB()]).then(([resA, resB]) => {
+    console.log(resA);
+    console.log(resB);
 });
 
-instan.get('/60cffece00019d4217920764.jpg')
-
-instan.get('https://img1.mukewang.com/60cffece00019d4217920764.jpg')
+const fakeConfig = {
+    baseURL: 'https://www.baidu.com',
+    url: '/user/1234525',
+    params: {
+        idClient: 1,
+        idTest: 2,
+        testString: 'thisIsATest'
+    }
+}
+console.log(axios.getUri(fakeConfig));

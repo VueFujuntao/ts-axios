@@ -2,7 +2,7 @@
  * @Author: fjt
  * @Date: 2021-06-06 12:56:33
  * @LastEditors: fjt
- * @LastEditTime: 2021-06-19 13:58:55
+ * @LastEditTime: 2021-06-26 22:33:21
  */
 import Axios from './code/Axios'
 import { extend } from './helpers/utils'
@@ -32,5 +32,17 @@ axios.create = function(config: AxiosRequestConfig): AxiosInstance {
 
 axios.CancelToken = cancelToken
 axios.isCancel = isCancel
+
+axios.all = function all(promises) {
+  return Promise.all(promises)
+}
+
+axios.spread = function spread(callback) {
+  return function wrap(arr) {
+    return callback.apply(null, arr)
+  }
+}
+
+axios.Axios = Axios
 
 export default axios

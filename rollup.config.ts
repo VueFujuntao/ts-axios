@@ -2,7 +2,7 @@
  * @Author: fjt
  * @Date: 2021-06-06 12:21:28
  * @LastEditors: fjt
- * @LastEditTime: 2021-06-06 18:14:33
+ * @LastEditTime: 2021-06-27 10:43:30
  */
 import resolve from 'rollup-plugin-node-resolve'
 import commonjs from 'rollup-plugin-commonjs'
@@ -13,10 +13,10 @@ import json from 'rollup-plugin-json'
 
 const pkg = require('./package.json')
 
-const libraryName = 'index'
+const libraryName = 'axios'
 
 export default {
-  input: `src/${libraryName}.ts`,
+  input: `src/index.ts`,
   output: [
     { file: pkg.main, name: camelCase(libraryName), format: 'umd', sourcemap: true },
     { file: pkg.module, format: 'es', sourcemap: true },
